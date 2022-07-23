@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, TextInput, Button, StyleSheet } from "react-native";
+import { View, TextInput, Button, StyleSheet, Image } from "react-native";
 
 
 const GoalsInput = props => {
@@ -17,33 +17,53 @@ const GoalsInput = props => {
 
     return(
         <View style={styles.inputZone} >
+            <Image resizeMode="contain" style={styles.icon} source={require("../assets/targeImage.png")} />
             <TextInput
                 value={enteredGoal}
                 style={styles.input}
                 placeholder="Enter your goal..."
                 onChangeText={handleTextChange}
             />
-            <Button title="Add Goal" color={"#54d2d2"} onPress={handleAddNewGoal} />
+            <View style={styles.buttonBlock}>
+                <View style={styles.button} >
+                    <Button title="Cancel" color="#e81356" onPress={props.toggleModal} />
+                </View>
+                <View style={styles.button} >
+                    <Button title="Add Goal" color="#EBE645" onPress={handleAddNewGoal} />
+                </View>
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     input : {
-        width : "75%",
-        height : 40,
-        paddingHorizontal : 10,
-        borderWidth : 1,
-        borderColor : "#cccccc"
+        width : "100%",
+        height : 45,
+        marginVertical : 16,
+        backgroundColor : "#577BC1",
+        borderRadius : 5,
+        paddingHorizontal : 16
     },
     inputZone : {
         flex : 1,
-        flexDirection : "row",
         justifyContent : "space-between",
         alignItems : "center",
-        borderBottomWidth : 1,
-        borderColor : "#cccccc"
+        justifyContent : "center"
     },
+    buttonBlock : {
+        flexDirection : "row",
+        width : "100%",
+        justifyContent : "center"
+    },
+    button :{
+        width : 100,
+        marginLeft : 10
+    },
+    icon :{
+        width : 100,
+        height : 100,
+    }
 });
 
 export default GoalsInput;

@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "the-goals-app",
+    "backgroundColor" : "#000957",
     "slug": "the-goals-app",
     "version": "1.0.0",
     "orientation": "portrait",

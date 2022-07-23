@@ -1,24 +1,30 @@
-import { View, Text, StyleSheet , TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 
 const GoalItem = props => {
     return(
-        <TouchableOpacity onPress={() => props.onDeleteGoal(props.goal.id)} >
-            <View style={styles.goalItem}>
+        <View style={styles.goalItem}>
+            <Pressable
+                android_ripple={{ color: "#cccccc" }}
+                onPress={() => props.onDeleteGoal(props.goal.id)}
+                style={({pressed}) => {
+                    return {opacity : pressed ? 0.5 : 1}
+                }}
+            >
                 <Text style={styles.goalItemText}>{props.goal.title}</Text>
-            </View>
-        </TouchableOpacity>
+            </Pressable>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
     goalItem :{
-        padding : 10,
         marginHorizontal : 10,
         marginTop : 10,
         borderRadius : 5,
-        backgroundColor : "#072448"
+        backgroundColor : "#344CB7"
     },
     goalItemText : {
+        padding : 10,
         color : "#54d2d2",
     }
 });
