@@ -1,18 +1,14 @@
 import { View, Text, StyleSheet } from "react-native";
+import StartGanmmeScreen from "./screens/StartGammeScreen";
 
 const MyComponent = props => {
     return(
-        <View style={styles.app}>
-            <Text>Hello world!</Text>
-        </View>
+        <StartGanmmeScreen/>
     );
 };
 
 const styles = StyleSheet.create({
-    app : {
-        justifyContent : "center",
-        alignItems : "center"
-    }
+
 });
 
 export default MyComponent;
