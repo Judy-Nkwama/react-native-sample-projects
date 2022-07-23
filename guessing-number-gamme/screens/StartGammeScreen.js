@@ -1,26 +1,56 @@
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import { useState } from "react";
+import { View , StyleSheet, TextInput, Alert } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
-const StartGanmmeScreen = props => {
-    return(
+
+const StartGanmmeScreen = ({choseGammeNumber}) => {
+
+    const [enteredNumber, setEnteredNumber] = useState();
+
+    const handleChangeNumber = typed => {
+        setEnteredNumber(typed);
+    };
+
+    const handleChoseNumber = () => {
+        if(isNaN(enteredNumber) || enteredNumber <= 0 || enteredNumber > 99 ){
+            Alert.alert(
+                "Invalid Number!",
+                "A number between 1 and 99 is required.",
+                [{text : "Okay", style : "destructive", onPress : resetNumberInput }]
+            );
+            return;
+        }
+        choseGammeNumber(enteredNumber);
+    };
+
+    const resetNumberInput = () => {
+        setEnteredNumber("");
+    };
+
+    return (
         <View style={styles.inputZone}>
-            <TextInput 
+            <TextInput
                 maxLength={2}
-                style={styles.numberInpur} 
+                style={styles.numberInpur}
                 keyboardType="number-pad"
                 autoFocus={true}
+                value={enteredNumber}
+                onChangeText={handleChangeNumber}
             />
-            <PrimaryButton>Confirm</PrimaryButton>
-            <PrimaryButton>Cancel</PrimaryButton>
+            <View style={styles.btnsWrapper}>
+                <PrimaryButton onPress={resetNumberInput}>Cancel</PrimaryButton>
+                <PrimaryButton onPress={handleChoseNumber}>Confirm</PrimaryButton>
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     inputZone : {
+        alignItems : "center",
         padding : 16,
         marginHorizontal : 24,
         marginTop : 100,
-        backgroundColor : "#590696",
+        backgroundColor : "#4a0180",
         borderRadius : 12,
         elevation : 4,
         shadowColor : "black",
@@ -41,6 +71,9 @@ const styles = StyleSheet.create({
         fontWeight : "bold",
         marginVertical : 12,
         padding : 8
+    },
+    btnsWrapper : {
+        flexDirection : "row"
     }
 });
 
