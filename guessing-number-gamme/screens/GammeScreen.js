@@ -1,9 +1,10 @@
 import { View, Text, StyleSheet } from "react-native";
+import Title from "../components/Title";
 
 const GammeScreen = props => {
     return(
         <View>
-            <Text>Gamme screen</Text>
+            <Title>Opponent Choise</Title>
         </View>
     );
 };

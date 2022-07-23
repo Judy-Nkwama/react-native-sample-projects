@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { View , StyleSheet, TextInput, Alert } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
+import { colors } from "../constants/colors";
 
 const StartGanmmeScreen = ({choseGammeNumber}) => {
 
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
         padding : 16,
         marginHorizontal : 24,
         marginTop : 100,
-        backgroundColor : "#4a0180",
+        backgroundColor : colors.primary,
         borderRadius : 12,
         elevation : 4,
         shadowColor : "black",
@@ -65,8 +66,8 @@ const styles = StyleSheet.create({
         width : 50,
         textAlign : "center",
         borderBottomWidth : 2,
-        borderBottomColor : "#FBCB0A",
-        color : "#FBCB0A",
+        borderBottomColor : colors.ternary,
+        color : colors.ternary,
         fontSize : 25,
         fontWeight : "bold",
         marginVertical : 12,

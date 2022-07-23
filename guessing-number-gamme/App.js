@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, ImageBackground } from "react-native";
+import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import StartGanmmeScreen from "./screens/StartGammeScreen";
@@ -25,8 +25,8 @@ const App = props => {
                 style={{ flex: 1, width: "100%" }}
                 imageStyle={{ opacity: 0.15 }}
                 resizeMode="repeat"
-            >
-                {currentScreen}
+            >   
+                <SafeAreaView style={styles.container}>{currentScreen}</SafeAreaView>
             </ImageBackground>
         </LinearGradient>
     );
