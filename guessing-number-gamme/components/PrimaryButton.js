@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     },
     primaryButtonText : {
         textAlign : "center",
-        color : "white"
+        color : "black"
     },
     pressed : {
         backgroundColor : colors.primary200,
