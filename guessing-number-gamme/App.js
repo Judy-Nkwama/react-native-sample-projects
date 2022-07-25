@@ -12,7 +12,7 @@ const App = props => {
     };
 
     let currentScreen = <StartGanmmeScreen choseGammeNumber={handleGammeNumber} />;
-    if(gammeNumber) currentScreen = <GammeScreen gaNumber={gammeNumber} />
+    if(gammeNumber) currentScreen = <GammeScreen numberGamme={gammeNumber} />
 
     return(
         <LinearGradient

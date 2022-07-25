@@ -2,16 +2,22 @@ import { useState } from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import Title from "../components/Title";
 import { colors } from "../constants/colors";
+import Guess from "../components/Guess";
 
-const GammeScreen = ({numberGmme}) => {
+const GammeScreen = ({numberGamme}) => {
 
-    const geussingNumber = ( min, max ) => {
-        return  Math.floor( Math.random() * ( max - min ) ) + min
+    
+    const geussingNumber = ( min, max, exept ) => {
+        let guess = Math.floor( Math.random() * ( max - min ) ) + min;
+        while( guess === exept ){
+            guess = Math.floor( Math.random() * ( max - min ) ) + min;
+        }
+        return guess;
     };
 
 
 
-    const [currentGuest, setCurrentGuest] = useState();
+    const [currentGuest, setCurrentGuest] = useState( geussingNumber( 1, 99, numberGamme ));
 
 
     return(
@@ -24,7 +30,7 @@ const GammeScreen = ({numberGmme}) => {
                 >
                      <Text style={styles.btnText}>+</Text>
                 </Pressable>
-                <Text style={styles.geuss}>{55}</Text>
+                <Text style={styles.geuss}>{currentGuest}</Text>
                 <Pressable 
                     style={({pressed}) => pressed ? [styles.btn, styles.btnPressed] : styles.btn} 
                     onPress={()=>{}}
@@ -33,7 +39,8 @@ const GammeScreen = ({numberGmme}) => {
                 </Pressable>
             </View>
             <View>
-                <Text>Previous Guesses</Text>
+                <Guess direction={"lower"} />
+                <Guess direction={"higher"} />
             </View>
         </View>
     );
@@ -45,7 +52,7 @@ const styles = StyleSheet.create({
     },
     gameControlZone : {
         height : 150,
-        marginTop : 16,
+        marginVertical : 16,
         borderRadius : 24,
         flexDirection : "row",
         justifyContent : "center",
