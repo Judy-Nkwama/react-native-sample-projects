@@ -12,10 +12,15 @@ const App = props => {
 
     const [ gammeNumber, setGammeNumber ] = useState();
     const [ gammeOver, setgammeOver ] = useState();
+    const [ gammeGuesses, setGammeGuesses ] = useState([]);
 
-    useFonts({
+    const handleNewGuess = newGuess => {
+        setGammeGuesses( () => [...gammeGuesses, newGuess] )
+    };
+
+    const [fontsloaded] = useFonts({
         "nunitoSans-Regular" : require("./assets/fonts/NunitoSans-Regular.ttf"),
-        "OpenSans-Regular" : require("./assets/fonts/OpenSans-R/egular.ttf"),
+        "OpenSans-Regular" : require("./assets/fonts/OpenSans-Regular.ttf"),
         "nunitoSans-Bold" : require("./assets/fonts/NunitoSans-Bold.ttf"),
         "OpenSans-Bold" : require("./assets/fonts/OpenSans-Bold.ttf")
     });
@@ -27,11 +32,30 @@ const App = props => {
         setgammeOver(true);
     };
 
+    const handleNewGamme = () => {
+        setGammeNumber(null);
+        setgammeOver(false);
+        setGammeGuesses([]);
+    };
+
     let currentScreen = <StartGanmmeScreen choseGammeNumber={handleGammeNumber} />;
     if(gammeOver){
-        currentScreen = <GammeOverScreen />;
+        currentScreen = <GammeOverScreen 
+            gammeNumber={gammeNumber}
+            gammeGuesses={gammeGuesses}
+            onStartNeweGamme={handleNewGamme}
+        />;
     }else if(gammeNumber){
-        currentScreen = <GammeScreen numberGamme={gammeNumber}  onGammeOver={handleGammeOver} />;
+        currentScreen = <GammeScreen 
+            numberGamme={gammeNumber}  
+            onGammeOver={handleGammeOver}
+            gammeGuesses={gammeGuesses}
+            onNewGuess={handleNewGuess}
+        />;
+    }
+
+    if(!fontsloaded){
+        return <AppLoading />;
     }
 
     return(

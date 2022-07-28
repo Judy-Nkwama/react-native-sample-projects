@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { View, Text, StyleSheet, Pressable, Alert } from "react-native";
+import { useEffect, useState } from "react";
+import { View, Text, StyleSheet, Pressable, Alert, FlatList } from "react-native";
 import { AntDesign } from '@expo/vector-icons';
 import Title from "../components/Title";
 import { colors } from "../constants/colors";
@@ -17,12 +17,19 @@ const geussNumber = ( min, max, exept ) => {
     }
 };
 
-const GammeScreen = ({numberGamme, onGammeOver}) => {
+const GammeScreen = ({numberGamme, onGammeOver, gammeGuesses, onNewGuess}) => {
 
     const initialGuest = geussNumber( minBoundary, maxBoundary, numberGamme );
     const [currentGuest, setCurrentGuest] = useState(initialGuest);
 
+    useEffect(()=>{
+        //set boundaries back to initial values onStartNewGamme
+        minBoundary = 1;
+        maxBoundary = 100;
+    }, []);
+
     const nextGuess = ( direction ) => {
+        
         if( 
             (direction == "lower" && currentGuest < numberGamme) || 
             (direction == "higher" && currentGuest > numberGamme)
@@ -40,13 +47,17 @@ const GammeScreen = ({numberGamme, onGammeOver}) => {
             minBoundary = currentGuest + 1;
         }
 
-        const newGuess = geussNumber(minBoundary, maxBoundary, currentGuest);
+        //just add it to the array of guesses if the guess isn't correct
+        onNewGuess({id : gammeGuesses.length + 1, guess : currentGuest, direction : direction = (direction == "lower") ? "higher" : "lower" });
 
+        //generate computer's new guess
+        const newGuess = geussNumber(minBoundary, maxBoundary, currentGuest);
+        //if the guess is correcte
         if(newGuess == numberGamme){
+            onNewGuess({id : gammeGuesses.length + 1, guess : newGuess, direction : "fund" });
             onGammeOver();
             return;
         }
-
         setCurrentGuest(newGuess);
     };
 
@@ -55,27 +66,27 @@ const GammeScreen = ({numberGamme, onGammeOver}) => {
         <View style={styles.gammeScreen}>
             <Title>Computer's Guess</Title>
             <View style={styles.gammeZone}>
-                <Description>Is it Higher or Lower?</Description>
+                <Description>Is {currentGuest} Lower or Higher?</Description>
                 <View style={styles.gameControlZone}>
                 <Pressable 
                     style={({pressed}) => pressed ? [styles.btn, styles.btnPressed] : styles.btn} 
-                    onPress={ nextGuess.bind(this,"lower") }
+                    onPress={ nextGuess.bind(this,"higher") }
                 >
                     <AntDesign name="doubleleft" size={20} color="white" />
                 </Pressable>
                 <Text style={styles.geuss}>{currentGuest}</Text>
                 <Pressable 
                     style={({pressed}) => pressed ? [styles.btn, styles.btnPressed] : styles.btn} 
-                    onPress={nextGuess.bind(this,"higher")}
+                    onPress={nextGuess.bind(this,"lower")}
                 >
                     <AntDesign name="doubleright" size={20} color="white" />
                 </Pressable>
                 </View>
             </View>
-            <View>
-                <Guess direction={"lower"} />
-                <Guess direction={"higher"} />
-            </View>
+            <FlatList 
+                data={gammeGuesses.reverse()}
+                renderItem={ data => <Guess guess={data.item.guess} direction={data.item.direction} /> }
+            />
         </View>
     );
 };

@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet } from "react-native";
 
-const Guess = ({direction}) => {
+const Guess = ({direction, guess}) => {
     return(
         <View style={{...styles.higherGuess, ...{backgroundColor : direction == "higher" ? "#ff8cc2" : "#75cf6b"}}}>
-            <Text style={[styles.text, styles.guess]}>{55}</Text>
+            <Text style={[styles.text, styles.guess]}>{guess}</Text>
             <Text style={[styles.text, styles.caption, {backgroundColor : direction == "higher" ? "#ffd4e8": "#daffd6"}]}>{direction === "higher" ? "Was Higher" : "Was lower"}</Text>
         </View>
     );
@@ -27,12 +27,14 @@ const styles = StyleSheet.create({
     },
     text : {
         paddingVertical : 12,
-        fontSize : 17
+        fontSize : 17,
+        fontFamily : "nunitoSans-Regular"
     },
     guess : {
         flex : 1,
         paddingLeft : 16,
-        color : "white"
+        color : "white",
+        fontFamily : "nunitoSans-Regular"
     },
     caption : {
         flex: 4,

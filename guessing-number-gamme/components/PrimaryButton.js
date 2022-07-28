@@ -4,31 +4,38 @@ import { colors } from "../constants/colors";
 const PrimaryButton = ({children, onPress}) => {
     return(
         <View style={styles.container}>
-            <Pressable
-                style={({pressed})=> pressed ? [styles.primaryButtonContainer, styles.pressed] : [styles.primaryButtonContainer] }
-                onPress={onPress}
-                android_ripple={{color : colors.primary200}}
-            >
-                <Text style={styles.primaryButtonText} >{children}</Text>
-            </Pressable>
+             <Pressable
+                    style={({pressed})=> pressed ? [styles.primaryButtonContainer, styles.pressed] : [styles.primaryButtonContainer] }
+                    onPress={onPress}
+                    android_ripple={{color : colors.primary200}}
+                >
+                    <Text style={styles.primaryButtonText} >{children}</Text>
+                </Pressable>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container : {
-        flex : 1,
         margin : 4,
         borderRadius : 32,
-        overflow : "hidden"
+        overflow : "hidden",
+        elevation : 4,
+        shadowColor : "black",
+        shadowOffset : { width : 0, height: 2},
+        shadowRadius : 4
     },
+   
     primaryButtonContainer :{
-        padding : 8,
-        backgroundColor : colors.seconadary,
+        paddingVertical : 8,
+        paddingHorizontal : 24,
+        backgroundColor : colors.seconadary
     },
     primaryButtonText : {
         textAlign : "center",
-        color : "white"
+        color : "white",
+        fontFamily : "nunitoSans-Regular",
+        fontSize : 18
     },
     pressed : {
         backgroundColor : colors.primary200,

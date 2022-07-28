@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
         textAlign : "center",
         marginVertical : 8,
         fontSize : 20,
+        fontFamily : "nunitoSans-Regular",
         color : colors.ternary
     }
 });
