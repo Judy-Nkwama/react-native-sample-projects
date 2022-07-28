@@ -1,23 +1,44 @@
 import { useState } from "react";
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet, Pressable, Alert } from "react-native";
 import Title from "../components/Title";
 import { colors } from "../constants/colors";
 import Guess from "../components/Guess";
 
+const geussNumber = ( min, max, exept ) => {
+    let guess = Math.floor( Math.random() * ( max - min ) ) + min;
+    if( guess === exept ){
+        return Math.floor( Math.random() * ( max - min ) ) + min;
+    }else{
+        return guess;
+    }
+};
+
 const GammeScreen = ({numberGamme}) => {
 
-    
-    const geussingNumber = ( min, max, exept ) => {
-        let guess = Math.floor( Math.random() * ( max - min ) ) + min;
-        while( guess === exept ){
-            guess = Math.floor( Math.random() * ( max - min ) ) + min;
+    let minBoundary = 1;
+    let maxBoundary = 100;
+
+    const [currentGuest, setCurrentGuest] = useState( geussNumber( minBoundary, maxBoundary, numberGamme ));
+
+    const nextGuess = ( direction ) => {
+        if( 
+            (direction === "higher" && currentGuest < numberGamme) || 
+            (direction === "lower" && currentGuest > numberGamme)
+        ){
+            Alert.alert(
+                "Don't full the computer. You know this is wrong!",
+                [{Text : "Sorry!", style : "cancel"}]
+            );
+            return;
         }
-        return guess;
+        if( direction === "lower"){
+            maxBoundary = currentGuest;
+        }else{
+            minBoundary = currentGuest + 1;
+        }
+        setCurrentGuest(geussNumber(minBoundary, maxBoundary, currentGuest));
+        
     };
-
-
-
-    const [currentGuest, setCurrentGuest] = useState( geussingNumber( 1, 99, numberGamme ));
 
 
     return(
@@ -26,14 +47,14 @@ const GammeScreen = ({numberGamme}) => {
             <View style={styles.gameControlZone}>
                 <Pressable 
                     style={({pressed}) => pressed ? [styles.btn, styles.btnPressed] : styles.btn} 
-                    onPress={()=>{}}
+                    onPress={() => nextGuess("higher")}
                 >
                      <Text style={styles.btnText}>+</Text>
                 </Pressable>
                 <Text style={styles.geuss}>{currentGuest}</Text>
                 <Pressable 
                     style={({pressed}) => pressed ? [styles.btn, styles.btnPressed] : styles.btn} 
-                    onPress={()=>{}}
+                    onPress={ () => nextGuess("lower") }
                 >
                     <Text style={styles.btnText}>-</Text>
                 </Pressable>
