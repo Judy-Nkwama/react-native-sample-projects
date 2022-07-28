@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
     container : {
         padding : 16,
         borderWidth : 2,
-        borderColor : "white"
+        borderColor : "white",
+        borderRadius : 5
     },
     titleText : {
         color : "white",
