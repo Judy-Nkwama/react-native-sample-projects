@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -11,8 +11,14 @@ const App = props => {
 
     return(
         <NavigationContainer>
-            <StatusBar style="auto" />
-            <Stack.Navigator>
+            <StatusBar style={Platform.select({ios : "dark", android : "light"})} />
+            <Stack.Navigator
+                screenOptions={{
+                    headerStyle : { backgroundColor : Platform.select({ios : "white", android : "#1b2e4b"}) },
+                    headerTintColor : Platform.select({ ios : "#1b2e4b", android : "white" }),
+                    contentStyle : { backgroundColor : "#e6e6ff"}
+                }}
+            >
                 <Stack.Screen 
                     name="MealsCategories" 
                     component={CategoriesScreen} 

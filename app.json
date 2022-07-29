@@ -4,14 +4,13 @@
     "slug": "the-meals-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/MyIcon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/MyIcon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#223A5E"
+      "backgroundColor": "#1b2e4b"
     },
-    "backgroundColor" : "#223A5E",
     "updates": {
       "fallbackToCacheTimeout": 0
     },
