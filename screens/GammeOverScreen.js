@@ -1,13 +1,21 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, Dimensions, useWindowDimensions } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import Title from "../components/Title";
 import { colors } from "../constants/colors";
 
 const GammeOverScreen = ({gammeNumber, gammeGuesses, onStartNeweGamme}) => {
+
+    const { width, height } = useWindowDimensions();
+    const ImadeBlock = {
+        width : width > 500 ? 100 : 300,
+        height : width > 500 ? 100 : 300,
+        borderRadius : width > 500 ? 50 : 150 
+    };
+
     return(
         <View style={styles.container}>
             <Title>Correct Guess!</Title>
-            <View style={styles.goImageContainer}>
+            <View style={[styles.goImageContainer, ImadeBlock ]}>
                 <Image style={styles.goImage} source={require("../assets/images/gameOver.jpg")} />
             </View>
             <Text style={styles.stat}>
@@ -19,21 +27,23 @@ const GammeOverScreen = ({gammeNumber, gammeGuesses, onStartNeweGamme}) => {
     );
 };
 
+const {width, height} = Dimensions.get("window");
+const brkPointWidth = 330;
+const brkPointHeight = 680;
+//alert(height);
+
 const styles = StyleSheet.create({
     container : {
         flex : 1,
-        marginTop : 50,
+        marginTop : height > brkPointHeight ? 50 : 25,
         alignItems : "center",
         padding : 24
     },
     goImageContainer : {
-        width : 300, 
-        height : 300,
-        borderRadius : 150,
         overflow : "hidden",
         borderWidth : 3,
         borderColor : colors.ternary,
-        marginTop : 48
+        marginTop : height > brkPointHeight ? 48 : 24,
     },
     goImage : {
         width : "100%",
@@ -41,8 +51,8 @@ const styles = StyleSheet.create({
     },
     stat : {
         color : colors.primary,
-        marginVertical : 24,
-        fontSize : 20,
+        marginVertical : height > 650 ? 24 : 12,
+        fontSize :  width > brkPointWidth ? 20 : 17,
         fontFamily : "nunitoSans-Bold",
         textAlign : "center",
         textShadowColor : colors.seconadary,

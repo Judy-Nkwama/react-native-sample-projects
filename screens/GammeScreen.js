@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Pressable, Alert, FlatList } from "react-native";
+import { View, Text, StyleSheet, Pressable, Alert, FlatList, useWindowDimensions } from "react-native";
 import { AntDesign } from '@expo/vector-icons';
 import Title from "../components/Title";
 import { colors } from "../constants/colors";
@@ -61,9 +61,10 @@ const GammeScreen = ({numberGamme, onGammeOver, gammeGuesses, onNewGuess}) => {
         setCurrentGuest(newGuess);
     };
 
-
+    const { width, height } = useWindowDimensions();
+    
     return(
-        <View style={styles.gammeScreen}>
+        <View style={{marginTop : width > 500 ? 24 : 75, paddingHorizontal : width > 500 ? 100 : 24}}>
             <Title>Computer's Guess</Title>
             <View style={styles.gammeZone}>
                 <Description>Is {currentGuest} Lower or Higher?</Description>
@@ -97,11 +98,7 @@ const styles = StyleSheet.create({
         marginVertical : 24,
         borderRadius : 24,
         paddingVertical : 8,
-        backgroundColor : colors.primary,
-    },
-    gammeScreen : {
-        marginTop : 50,
-        padding : 24
+        backgroundColor : colors.primary
     },
     gameControlZone : {
         flexDirection  :"row",

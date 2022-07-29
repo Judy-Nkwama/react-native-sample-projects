@@ -1,9 +1,9 @@
 {
   "expo": {
     "name": "guessing-number-gamme",
-    "slug": "the-goals-app",
+    "slug": "GuessMyNumber",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {

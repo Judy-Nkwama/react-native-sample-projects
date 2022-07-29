@@ -1,17 +1,19 @@
 import { useState } from "react";
-import { View, Text, StyleSheet, TextInput, Alert } from "react-native";
+import { View, StyleSheet, TextInput, Alert, useWindowDimensions, KeyboardAvoidingView, ScrollView } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import { colors } from "../constants/colors";
 import Title from "../components/Title";
 import Description from "../components/Description";
 
 const StartGanmmeScreen = ({choseGammeNumber}) => {
-
+    
     const [enteredNumber, setEnteredNumber] = useState();
 
     const handleChangeNumber = typed => {
         setEnteredNumber(typed);
     };
+
+    const { width, height } = useWindowDimensions();
 
     const handleChoseNumber = () => {
         if(isNaN(enteredNumber) || enteredNumber <= 0 || enteredNumber > 99 ){
@@ -30,32 +32,34 @@ const StartGanmmeScreen = ({choseGammeNumber}) => {
     };
 
     return (
-        <View style={styles.container}>
-            <Title style={styles.title}>Guess My Number</Title>
-            <View style={styles.inputZone}>
-                <Description>Enter your Number</Description>
-                <TextInput
-                    maxLength={2}
-                    style={styles.numberInpur}
-                    keyboardType="number-pad"
-                    autoFocus={true}
-                    value={enteredNumber}
-                    onChangeText={handleChangeNumber}
-                />
-                <View style={styles.btnsWrapper}>
-                    <PrimaryButton onPress={resetNumberInput}>Cancel</PrimaryButton>
-                    <PrimaryButton onPress={handleChoseNumber}>Confirm</PrimaryButton>
+        <ScrollView style={styles.container}>
+            <KeyboardAvoidingView style={styles.container} behavior="position">
+                <View style={[styles.container, { marginTop: height > 420 ? 100 : 32, marginHorizontal: width > 500 ? 100 : 24 }]}>
+                    <Title style={styles.title}>Guess My Number</Title>
+                    <View style={styles.inputZone}>
+                        <Description>Enter your Number</Description>
+                        <TextInput
+                            maxLength={2}
+                            style={styles.numberInpur}
+                            keyboardType="number-pad"
+                            autoFocus={true}
+                            value={enteredNumber}
+                            onChangeText={handleChangeNumber}
+                        />
+                        <View style={styles.btnsWrapper}>
+                            <PrimaryButton onPress={resetNumberInput}>Cancel</PrimaryButton>
+                            <PrimaryButton onPress={handleChoseNumber}>Confirm</PrimaryButton>
+                        </View>
+                    </View>
                 </View>
-            </View>
-        </View>
+            </KeyboardAvoidingView>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     container : {
-        flex : 1,
-        marginHorizontal : 24,
-        marginTop : 100
+        flex : 1
     },
     inputZone : {
         alignItems : "center",
