@@ -11,10 +11,9 @@ const Category = ({color, title, iconUrl, onPress}) => {
                 <View style={styles.categoryInerContainer}>
                     <View style={[styles.round1, {backgroundColor : color}]}>
                         <View style={styles.round2}>
-                            <Image style={styles.icon} source={ iconUrl ? {uri : iconUrl} : require("../assets/MyIcon.png")} />
+                            <Image style={styles.icon} source={ iconUrl ? {uri : iconUrl} : require("../assets/icon.png")} />
                         </View>
                     </View>
-                    
                     <Text style={styles.title}>{title}</Text>
                 </View>
                 

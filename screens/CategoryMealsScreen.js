@@ -18,6 +18,7 @@ const CategoryMealsScreen = ({ navigation, route }) => {
     const renderMeal = itemData => {
         const meal = itemData.item;
         const mealProps = {
+            id : meal.id,
             title : meal.title,
             imageUrl : meal.imageUrl,
             complexity : meal.complexity,
