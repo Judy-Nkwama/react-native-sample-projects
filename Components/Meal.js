@@ -11,9 +11,9 @@ const Meal = ({ title, imageUrl, duration, complexity, affordability }) => {
                     <Image style={styles.image} source={{ uri: imageUrl }} />
                     <Text style={styles.title}>{title}</Text>
                     <View style={styles.mealDetails}>
-                        <Text style={styles.detail}>{duration}min</Text>
-                        <Text style={styles.detail}>{complexity}</Text>
-                        <Text style={styles.detail}>{affordability}</Text>
+                        <Text style={[styles.detail, {backgroundColor : "#00A170"}]}>{duration}min</Text>
+                        <Text style={[styles.detail, {backgroundColor : "#D2386C"}]}>{complexity}</Text>
+                        <Text style={[styles.detail, {backgroundColor : "#FDAC53"}]}>{affordability}</Text>
                     </View>
                 </View>
             </Pressable>
@@ -61,7 +61,11 @@ const styles = StyleSheet.create({
         marginBottom : 8,
     },
     detail : {
-        marginHorizontal : 4
+        marginHorizontal : 4,
+        paddingVertical : 2,
+        paddingHorizontal : 8,
+        borderRadius : 8,
+        color : "white"
     }
 });
 

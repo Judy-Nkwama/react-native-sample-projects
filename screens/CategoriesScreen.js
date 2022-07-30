@@ -19,6 +19,7 @@ const CategoriesScreen = ({ navigation, route }) => {
                 <Category 
                     title={ itemData.item.title } 
                     color={ itemData.item.color } 
+                    iconUrl={ itemData.item.iconUrl }
                     onPress={ () => categoryPessHandler(itemData.item.id) } 
                 /> 
             }

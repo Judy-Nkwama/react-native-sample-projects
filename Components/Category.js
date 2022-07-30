@@ -1,16 +1,23 @@
-import { View, Text, StyleSheet, Pressable, Platform } from "react-native";
+import { View, Text, StyleSheet, Pressable, Platform, Image } from "react-native";
 
-const Category = ({color, title, onPress}) => {
+const Category = ({color, title, iconUrl, onPress}) => {
     return(
         <View style={styles.categoryOuterContainer} >
             <Pressable 
-                style={({pressed}) => [styles.pressable, {backgroundColor : color}, pressed ? styles.pressed : null] } 
+                style={({pressed}) => [styles.pressable, pressed ? styles.pressed : null] } 
                 android_ripple={{color : "white"}}
                 onPress={onPress}
             >
                 <View style={styles.categoryInerContainer}>
+                    <View style={[styles.round1, {backgroundColor : color}]}>
+                        <View style={styles.round2}>
+                            <Image style={styles.icon} source={ iconUrl ? {uri : iconUrl} : require("../assets/MyIcon.png")} />
+                        </View>
+                    </View>
+                    
                     <Text style={styles.title}>{title}</Text>
                 </View>
+                
             </Pressable>
         </View>
     );
@@ -31,7 +38,8 @@ const styles = StyleSheet.create({
         overflow : Platform.select({ios : "visible" , android : "hidden"})
     },
     pressable : {
-        flex : 1
+        flex : 1,
+        backgroundColor : "white"
     },
     pressed : {
         opacity : 0.5
@@ -41,6 +49,23 @@ const styles = StyleSheet.create({
         padding : 16,
         justifyContent : "center",
         alignItems : "center"
+    },
+    round1 : {
+        flex: 1,
+        borderRadius : 50,
+        padding : 12,
+    },
+    round2 : {
+        flex: 1,
+        borderRadius : 50,
+        padding : 12,
+        backgroundColor : "white",
+    },
+    icon : {
+        flex: 1,
+        width : 50,
+        height : 50,
+        resizeMode : "contain"
     },
     title : {
         fontSize : 18,

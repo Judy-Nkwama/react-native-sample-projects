@@ -2,16 +2,16 @@ import Category from '../models/category';
 import Meal from '../models/meal';
 
 export const CATEGORIES = [
-  new Category('c1', 'Italian', '#f5428d'),
-  new Category('c2', 'Quick & Easy', '#f54242'),
-  new Category('c3', 'Hamburgers', '#f5a442'),
-  new Category('c4', 'German', '#f5d142'),
-  new Category('c5', 'Light & Lovely', '#368dff'),
-  new Category('c6', 'Exotic', '#41d95d'),
-  new Category('c7', 'Breakfast', '#9eecff'),
-  new Category('c8', 'Asian', '#b9ffb0'),
-  new Category('c9', 'French', '#ffc7ff'),
-  new Category('c10', 'Summer', '#47fced')
+  new Category('c1', 'Italian', '#f5428d', 'https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/000000/external-pasta-bakery-flaticons-lineal-color-flat-icons-10.png'),
+  new Category('c2', 'Quick & Easy', '#f54242', 'https://img.icons8.com/emoji/48/000000/green-salad-emoji.png'),
+  new Category('c3', 'Hamburgers', '#f5a442', 'https://img.icons8.com/external-sbts2018-lineal-color-sbts2018/58/000000/external-hamburger-fast-food-sbts2018-lineal-color-sbts2018-1.png'),
+  new Category('c4', 'German', '#f5d142', 'https://img.icons8.com/doodle/48/000000/taco.png'),
+  new Category('c5', 'Light & Lovely', '#368dff', 'https://img.icons8.com/external-photo3ideastudio-flat-photo3ideastudio/64/000000/external-breakfast-restaurant-photo3ideastudio-flat-photo3ideastudio.png'),
+  new Category('c6', 'Exotic', '#41d95d', 'https://img.icons8.com/external-microdots-premium-microdot-graphic/64/000000/external-breakfast-lifestyle-entertainment-vol2-microdots-premium-microdot-graphic.png'),
+  new Category('c7', 'Breakfast', '#9eecff', 'https://img.icons8.com/external-basicons-color-danil-polshin/50/000000/external-breakfast-breakfast-basicons-color-danil-polshin-7.png'),
+  new Category('c8', 'Asian', '#b9ffb0', 'https://img.icons8.com/doodle/48/000000/noodles--v1.png'),
+  new Category('c9', 'French', '#ffc7ff', 'https://img.icons8.com/color/48/000000/kawaii-french-fries.png'),
+  new Category('c10', 'Summer', '#47fced', 'https://img.icons8.com/clouds/100/000000/coconut-cocktail.png')
 ];
 
 export const MEALS = [
