@@ -1,16 +1,14 @@
-import { FlatList, View, Text, StyleSheet } from "react-native";
+import { FlatList } from "react-native";
 import { CATEGORIES } from "../data/dummy-data";
 import Category from "../Components/Category";
 
-
-const CategoriesScreen = ({ navigation, route }) => {
+const CategoriesScreen = ({ navigation}) => {
 
     const categoryPessHandler = catId => {
         navigation.navigate("CategoryMealsScreen", {
             categoryId : catId
         });
     };
-
 
     return(
         <FlatList 
@@ -28,9 +26,5 @@ const CategoriesScreen = ({ navigation, route }) => {
         />
     );
 };
-
-const styles = StyleSheet.create({
-
-});
 
 export default CategoriesScreen;

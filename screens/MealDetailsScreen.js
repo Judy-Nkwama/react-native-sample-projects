@@ -1,21 +1,29 @@
 import { useLayoutEffect } from "react";
-import { View, Text, StyleSheet, Image, ScrollView, Dimensions } from "react-native";;
+import { View, Text, StyleSheet, Image, ScrollView, Dimensions, Platform } from "react-native";;
 import { MEALS } from "../data/dummy-data";
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleFavorite } from "../data/store/features/favoriteMeals";
 import MealDetailCard from "../Components/ui/mealDetailCard";
 import StepCard from "../Components/ui/StepCard";
-
+import IconButton from "../Components/ui/IconButton";
 
 const MealDetailsScreen = ({ route, navigation }) => {
 
+    const dispatcher = useDispatch();
     const mealId = route.params.mealId;
     const currentMeal = MEALS.find(meal => meal.id == mealId);
 
+    const toggleIsFavorite = () => {
+        dispatcher(toggleFavorite(mealId))
+    };
+
+    const favoriteMeals = useSelector(state => state.favoriteMeals);
     useLayoutEffect(()=>{
         navigation.setOptions({
-            title : currentMeal.title
-        })
-    }, [currentMeal]);
-
+            title : currentMeal.title,
+            headerRight : () => <IconButton name={favoriteMeals.includes(mealId) ? "star" : "star-outline"} color={Platform.select({ios : "#1b2e4b", android : "white"}) } onPress={toggleIsFavorite} />
+        });
+    }, [currentMeal, toggleIsFavorite, favoriteMeals]);
 
     return (
         <View style={styles.container}>
@@ -35,8 +43,6 @@ const MealDetailsScreen = ({ route, navigation }) => {
                     {currentMeal.steps.map(step => <StepCard key={step} title={step} stepNo={currentMeal.steps.indexOf(step) + 1} />)}
                 </View>
             </ScrollView>
-
-
         </View>
     );
 };
